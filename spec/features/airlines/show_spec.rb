@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Airline do
-  describe 'relationships' do
-    it { should have_many(:flights) }
-  end
-
+RSpec.describe 'airline show page'do
   before :each do
     @airline_1 = Airline.create!(name: 'Southwest Airlines')
 
@@ -23,15 +19,14 @@ RSpec.describe Airline do
     FlightLog.create!(flight: @flight_2, passenger: @passenger_4)
     FlightLog.create!(flight: @flight_3, passenger: @passenger_1)
     FlightLog.create!(flight: @flight_3, passenger: @passenger_2)
+
+    visit airline_path(@airline_1)
   end
 
-  describe 'instance methods' do
-    describe '#airline_adult_passengers' do
-      it 'returns unique list of adult passengers' do
-        
-        expect(@airline_1.airline_adult_passengers).to match_array([@passenger_1.name, @passenger_2.name, @passenger_4.name])
-        expect(@airline_1.airline_adult_passengers).to_not include(@passenger_3.name)
-      end
-    end
+  it 'displays unique list of all adult passengers on airline flights' do
+    expect(page).to have_content(@passenger_1.name)
+    expect(page).to have_content(@passenger_2.name)
+    expect(page).to_not have_content(@passenger_3.name)
+    expect(page).to have_content(@passenger_4.name)
   end
 end
