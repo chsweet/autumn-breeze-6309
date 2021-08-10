@@ -28,9 +28,12 @@ RSpec.describe Airline do
   describe 'instance methods' do
     describe '#airline_adult_passengers' do
       it 'returns unique list of adult passengers' do
-        
-        expect(@airline_1.airline_adult_passengers).to match_array([@passenger_1.name, @passenger_2.name, @passenger_4.name])
-        expect(@airline_1.airline_adult_passengers).to_not include(@passenger_3.name)
+        actual = @airline_1.airline_adult_passengers.map do |passenger|
+          passenger.passenger_name
+        end
+
+        expect(actual).to match_array([@passenger_1.name, @passenger_2.name, @passenger_4.name])
+        expect(actual).to_not include(@passenger_3.name)
       end
     end
   end
