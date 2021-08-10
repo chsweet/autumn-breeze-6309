@@ -54,21 +54,21 @@ RSpec.describe 'flights index page'do
       within("#passenger-#{@passenger_1.id}") do
         expect(page).to have_content(@passenger_1.name)
       end
-      expect(page).to_not have_content(@passenger_3.number)
+      expect(page).to_not have_content(@passenger_3.name)
     end
 
     within("#flight-#{@flight_2.id}") do
       within("#passenger-#{@passenger_3.id}") do
         expect(page).to have_content(@passenger_3.name)
       end
-      expect(page).to_not have_content(@passenger_5.number)
+      expect(page).to_not have_content(@passenger_5.name)
     end
 
     within("#flight-#{@flight_5.id}") do
       within("#passenger-#{@passenger_4.id}") do
         expect(page).to have_content(@passenger_4.name)
       end
-      expect(page).to_not have_content(@passenger_1.number)
+      expect(page).to_not have_content(@passenger_1.name)
     end
   end
 
