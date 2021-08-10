@@ -15,10 +15,13 @@ RSpec.describe 'airline show page'do
 
     FlightLog.create!(flight: @flight_1, passenger: @passenger_1)
     FlightLog.create!(flight: @flight_1, passenger: @passenger_2)
+    FlightLog.create!(flight: @flight_1, passenger: @passenger_4)
     FlightLog.create!(flight: @flight_2, passenger: @passenger_3)
     FlightLog.create!(flight: @flight_2, passenger: @passenger_4)
+    FlightLog.create!(flight: @flight_2, passenger: @passenger_2)
     FlightLog.create!(flight: @flight_3, passenger: @passenger_1)
     FlightLog.create!(flight: @flight_3, passenger: @passenger_2)
+    FlightLog.create!(flight: @flight_3, passenger: @passenger_4)
 
     visit airline_path(@airline_1)
   end
@@ -28,5 +31,11 @@ RSpec.describe 'airline show page'do
     expect(page).to have_content(@passenger_2.name)
     expect(page).to_not have_content(@passenger_3.name)
     expect(page).to have_content(@passenger_4.name)
+  end
+
+  it 'displays passengers in order from most flight to least' do
+    expect(@passenger_1.name).to_not appear_before(@passenger_4.name)
+    expect(@passenger_2.name).to appear_before(@passenger_1.name)
+    expect(@passenger_4.name).to appear_before(@passenger_2.name)
   end
 end
