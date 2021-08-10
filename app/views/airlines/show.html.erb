@@ -1,0 +1,5 @@
+<h1><%= @airline.name %></h1>
+<br>
+<% @airline.airline_adult_passengers.each do |passenger| %>
+  <%= passenger.passenger_name %>
+<% end %>
