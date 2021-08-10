@@ -72,4 +72,22 @@ RSpec.describe 'flights index page'do
     end
   end
 
+  it 'can click remove link to remove passenger from flight and redirect back to index page' do
+    within("#flight-#{@flight_2.id}") do
+      within("#passenger-#{@passenger_3.id}") do
+        click_button 'Remove'
+      end
+      expect(current_path).to be(flights_path)
+      expect(page).to_not have_content(@passenger_3.name)
+    end
+
+    within("#flight-#{@flight_5.id}") do
+      within("#passenger-#{@passenger_4.id}") do
+        click_button 'Remove'
+      end
+      expect(current_path).to be(flights_path)
+      expect(page).to_not have_content(@passenger_4.name)
+    end
+  end
+
 end
